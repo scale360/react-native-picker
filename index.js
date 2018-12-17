@@ -93,5 +93,17 @@ export default {
             }
             fn && fn(returnValue);
         });
+    },
+
+    enabledConfirm() {
+        if(android){
+            Picker.enabledConfirm();
+        }
+    },
+
+    disabledConfirm() {
+        if(android){
+            Picker.disabledConfirm();
+        }
     }
 };

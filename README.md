@@ -37,12 +37,14 @@
 
 |Key | Support | Description |
 | --- | ---- | ----------- |
-|init         | iOS/Android |init and pass parameters to picker      |
-|toggle       | iOS/Android |show or hide picker                     |
-|show         | iOS/Android |show picker                             |
-|hide         | iOS/Android |hide picker                             |
-|select       | iOS/Android |select a row                            |
-|isPickerShow | iOS/Android |get status of picker, return a boolean  |
+|init            | iOS/Android |init and pass parameters to picker      |
+|toggle          | iOS/Android |show or hide picker                     |
+|show            | iOS/Android |show picker                             |
+|hide            | iOS/Android |hide picker                             |
+|enabledConfirm  | Android     |enable confirm button                   |
+|disabledConfirm | Android     |disable confirm button                  |
+|select          | iOS/Android |select a row                            |
+|isPickerShow    | iOS/Android |get status of picker, return a boolean  |
 
 
 ### Usage

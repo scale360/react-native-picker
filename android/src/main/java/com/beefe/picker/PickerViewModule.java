@@ -123,6 +123,10 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
 
     private boolean isLoop = true;
 
+    private TextView cancelTV;
+    private TextView titleTV;
+    private TextView confirmTV;
+
     private String confirmText;
     private String cancelText;
     private String titleText;
@@ -153,9 +157,9 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
         if (activity != null && options.hasKey(PICKER_DATA)) {
             View view = activity.getLayoutInflater().inflate(R.layout.picker_view, null);
             RelativeLayout barLayout = (RelativeLayout) view.findViewById(R.id.barLayout);
-            TextView cancelTV = (TextView) view.findViewById(R.id.cancel);
-            TextView titleTV = (TextView) view.findViewById(R.id.title);
-            TextView confirmTV = (TextView) view.findViewById(R.id.confirm);
+            cancelTV = (TextView) view.findViewById(R.id.cancel);
+            titleTV = (TextView) view.findViewById(R.id.title);
+            confirmTV = (TextView) view.findViewById(R.id.confirm);
             RelativeLayout pickerLayout = (RelativeLayout) view.findViewById(R.id.pickerLayout);
             pickerViewLinkage = (PickerViewLinkage) view.findViewById(R.id.pickerViewLinkage);
             pickerViewAlone = (PickerViewAlone) view.findViewById(R.id.pickerViewAlone);
@@ -402,13 +406,14 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
                             //layoutParams.type = WindowManager.LayoutParams.TYPE_TOAST;
                         }
                     }
-                    layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                    layoutParams.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+                    layoutParams.dimAmount = 0.5f;
                     layoutParams.format = PixelFormat.TRANSPARENT;
                     layoutParams.windowAnimations = R.style.PickerAnim;
                     layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
                     layoutParams.height = height;
                     layoutParams.gravity = Gravity.BOTTOM;
-                    window.setAttributes(layoutParams);   
+                    window.setAttributes(layoutParams);
                 }
             } else {
                 dialog.dismiss();
@@ -458,6 +463,18 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
         } else {
             callback.invoke(null, dialog.isShowing());
         }
+    }
+
+    @ReactMethod
+    public void enabledConfirm() {
+        confirmTV.setText(!TextUtils.isEmpty(confirmText) ? confirmText : "");
+        confirmTV.setEnabled(true);
+    }
+
+    @ReactMethod
+    public void disabledConfirm() {
+        confirmTV.setText("");
+        confirmTV.setEnabled(false);
     }
 
     private int[] getColor(ReadableArray array) {
